@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ThreadItemComponent } from './thread-item/thread-item.component';
 import { ThreadListComponent } from './thread-list/thread-list.component';
+import { ThreadDetailComponent } from './thread-detail/thread-detail.component';
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
       NavbarComponent,
       ThreadItemComponent,
-      ThreadListComponent
+      ThreadListComponent,
+      ThreadDetailComponent
    ],
   imports: [
     BrowserModule,

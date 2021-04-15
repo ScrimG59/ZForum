@@ -1,4 +1,10 @@
 <div class="thread-item">
-  <div class="title"></div>
-  <div class="date"></div>
+  <div class="title">
+    <h5>{{ thread.Title }}</h5>
+  </div>
+  <hr>
+  <div class="content">
+    <div class="description"> {{ thread.Description }}</div>
+    <div class="date"> <span class="green">Created on: </span>{{ thread.Created }}</div>
+  </div>
 </div>

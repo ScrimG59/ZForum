@@ -1,3 +1,5 @@
 <div class="list">
-  <app-thread-item></app-thread-item>
+  <div *ngFor="let thread of threadList">
+    <app-thread-item [thread]="thread"></app-thread-item>
+  </div>
 </div>

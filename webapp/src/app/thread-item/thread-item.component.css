@@ -1,0 +1,55 @@
+.thread-item {
+  color: white;
+  width: 50vw;
+  margin: 0 1rem .6rem 1rem;
+  border-radius: 5px;
+  background-color: var(--clr-dark-theme-background-400);
+  transition: transform 250ms ease-in-out;
+  box-shadow: 0px 5px 10px 5px rgba(0,0,0,0.75);
+}
+
+.thread-item:hover {
+  transform: scale(1.1);
+  transition: transform 250ms ease-in-out;
+}
+
+.thread-item:hover h5 {
+  text-shadow: 0 0 5px var(--clr-dark-theme-green-300);
+}
+
+.thread-item:hover .green {
+  text-shadow: 0 0 5px var(--clr-dark-theme-green-300);
+}
+
+h5 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--clr-dark-theme-green-300);
+  padding: 1rem 1rem .5rem 1rem;
+  margin: 0;
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  display: flex;
+}
+
+.description {
+  font-size: 1;
+  padding: .5em;
+  min-width: 44vw;
+}
+
+.date {
+  padding: .5em;
+  height: auto;
+  border-left: 1px solid white;
+}
+
+.green {
+  color: var(--clr-dark-theme-green-300);
+}
