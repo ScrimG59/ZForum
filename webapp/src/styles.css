@@ -1,0 +1,19 @@
+:root{
+  --clr-dark-theme-background-200: hsl(0, 0%, 43%);
+  --clr-dark-theme-background-300: hsl(0, 0%, 33%);
+  --clr-dark-theme-background-400: hsl(0, 0%, 13%);
+  --clr-dark-theme-background-500: hsl(0, 0%, 5%);
+  --clr-dark-theme-green-200: hsl(120, 100%, 80%);
+  --clr-dark-theme-green-300: hsl(120, 100%, 60%);
+  --clr-dark-theme-green-400: hsl(120, 100%, 40%);
+  --clr-dark-theme-green-500: hsl(120, 100%, 30%);
+
+}
+
+body {
+  background-color: var(--clr-dark-theme-background-500);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
