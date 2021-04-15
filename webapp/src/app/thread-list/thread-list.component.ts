@@ -13,7 +13,7 @@ export class ThreadListComponent implements OnInit {
   threadList: Thread[] = [
     {
       Id: 1,
-      Title: "A new thread that is extremly long and really complex lol31234142134",
+      Title: "Anewthreadthatisextremlylongandreallycomplexlol31234142134",
       Description: "Test desc",
       Created: this.newDate
     },
@@ -40,7 +40,7 @@ export class ThreadListComponent implements OnInit {
     {
       Id: 5,
       Title: "A new thread that is extremly long and really complex lol31234142134",
-      Description: "Test descdsaihwfepöoaofehgfoiaüpöwgihnoeöawpghielghnkaeöpghnöperohgroiegöhegphr goöpihaogöhergieaghr epöoghaopihgproeaöhgoraeihgpaohga epoöghieapöghnepörghhtr shtrhsrhrshsrhrshsrhsrh",
+      Description: "Test descdsaihwfepöoaofehgfoiaüpöwg ihnoeöawpghielghnkaeöpghnöperohgroiegöhegphr goöpihaogöhergieaghr epöoghaopihgproeaöhgoraeihgpaohga epoöghieapöghnepörghhtr shtrhsrhrshsrhrshsrhsrh",
       Created: this.newDate
     },
 
