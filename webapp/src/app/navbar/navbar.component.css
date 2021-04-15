@@ -35,21 +35,9 @@ header {
   transition: transform 200ms ease-in-out;
 }
 
-@keyframes Rotation {
-  0% {
-    transform: translateX(-.25em) scale(1.2) rotate(0deg);
-  }
-
-  100% {
-    transform: translateX(-.25em) scale(1.2) rotate(360deg);
-  }
-
-}
-
 nav {
   position: absolute;
   text-align: left;
-  top: 100%;
   left: 0;
   background-color: var(--clr-dark-theme-background-400);
   width: 100%;
@@ -136,22 +124,6 @@ nav a:hover {
   transition: opacity 250ms ease-in-out 250ms;
 }
 
-.myItemList {
-  position: absolute;
-  top: 10%;
-  display: flex;
-}
-
-.myItemList ul {
-  list-style: none;
-}
-
-.myItemList li {
-  color: white;
-  margin-bottom: 1em;
-  font-size: 20px;
-}
-
 @media screen and (min-width: 800px) {
   .nav-toggle-label {
       display: none;
@@ -159,16 +131,17 @@ nav a:hover {
 
   header {
       display: grid;
-      grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+      grid-template-columns: auto minmax(600px, 3fr);
   }
 
   .logo {
-      grid-column: 2 / 3;
+      grid-column: 1;
+      margin: .5em 0 .5em 2em;
   }
 
   nav {
       all: unset;
-      grid-column: 3 / 4;
+      grid-column: 2;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -198,10 +171,10 @@ nav a:hover {
 
   nav ul {
       display: flex;
+      margin-right: 2em;
   }
 
   nav li {
-      margin-left: 3em;
-      margin-bottom: 0;
+      margin: 0 0 0 2em;
   }
 }
