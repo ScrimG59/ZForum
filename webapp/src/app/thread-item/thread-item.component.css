@@ -24,7 +24,7 @@ h5 {
   font-size: 1.5em;
   font-weight: bold;
   color: var(--clr-dark-theme-green-500);
-  padding: 1rem 1rem .5rem 1rem;
+  padding: 1rem;
   margin: 0;
 }
 
@@ -44,15 +44,14 @@ hr {
   color: rgb(228, 228, 228);
   padding: .5em;
   height: auto;
-  padding: 1rem 1rem .5rem 1rem;
+  padding: 1rem;
 }
 
 .date {
-  padding: .5em;
+  padding: .6rem;
   color: rgb(228, 228, 228);
   height: auto;
   border-left: 1px solid white;
-  padding: .6rem;
   right: 0;
 }
 
