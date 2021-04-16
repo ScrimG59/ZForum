@@ -6,6 +6,7 @@ export interface Thread {
   Title: string;
   Description: string;
   Posts?: Post[];
-  Created: string;
-  CreatedBy?: User;
+  CreationDate: string;
+  Username: string;
+  UserId: number;
 }
