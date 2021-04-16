@@ -14,7 +14,7 @@
   transition: transform 250ms ease-in-out;
 }
 
-.thread-item:hover h5,
+.thread-item:hover h5 a,
 .thread-item:hover .green {
   color: var(--clr-dark-theme-green-200);
 }
@@ -23,10 +23,15 @@ h5 {
   word-break: break-all;
   font-size: 1.5em;
   font-weight: bold;
-  color: var(--clr-dark-theme-green-500);
   padding: 1rem;
   margin: 0;
 }
+
+h5 a {
+  color: var(--clr-dark-theme-green-500);
+  text-decoration: none;
+}
+
 
 hr {
   padding: 0;
@@ -53,6 +58,11 @@ hr {
   height: auto;
   border-left: 1px solid white;
   right: 0;
+}
+
+.user-name {
+  text-decoration: none;
+  color: white;
 }
 
 .green {
