@@ -1,11 +1,11 @@
 class Post {
-    constructor(Id, Content, UserId, ThreadId, CreationDate) {
+    constructor(Id, Content, User, Thread, CreationDate) {
         this.Id = Id;
         this.Content = Content;
-        this.UserId = UserId;
-        this.ThreadId = ThreadId;
+        this.User = User;
+        this.Thread = Thread;
         this.CreationDate = CreationDate;
     }
 }
 
-export default Post;
+module.exports = Post;

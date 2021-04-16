@@ -1,12 +1,12 @@
 class Thread {
-    constructor(Id, Title, Description, CreationDate, UserId, Content) {
+    constructor(Id, Title, Description, CreationDate, User, Content) {
         this.Id = Id;
         this.Title = Title;
         this.Description = Description;
         this.CreationDate = CreationDate;
-        this.UserId = UserId;
+        this.User = User;
         this.Content = Content;
     }
 }
 
-export default Thread;
+module.exports = Thread;
