@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Thread } from 'src/models/thread';
+import { ThreadService } from 'src/services/thread.service';
 
 @Component({
   selector: 'app-thread-list',
@@ -9,97 +10,14 @@ import { Thread } from 'src/models/thread';
 export class ThreadListComponent implements OnInit {
 
   newDate = new Date().toLocaleString();
+  threadList: Thread[];
 
-  threadList: Thread[] = [
-    {
-      Id: 1,
-      Title: 'Anewthreadthatisextremlylongandreallycomplexlol31234142134',
-      Description: 'Test desc',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-
-    {
-      Id: 2,
-      Title: 'Down gehen',
-      Description: 'Ich will einfach down gehen',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-    {
-      Id: 3,
-      Title: 'A new thread that is extremly long and really complex lol31234142134',
-      Description: 'Test desc',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-
-    {
-      Id: 4,
-      Title: 'Down gehen',
-      Description: 'Ich will einfach down gehen',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-    {
-      Id: 5,
-      Title: 'A new thread that is extremly long and really complex lol31234142134',
-      Description: 'Test descdsaihwfepöoaofehgfoiaüpöwg ihnoeöawpghielghnkaeöpghnöperohgroiegöhegphr goöpihaogöhergieaghr epöoghaopihgproeaöhgoraeihgpaohga epoöghieapöghnepörghhtr shtrhsrhrshsrhrshsrhsrh',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-
-    {
-      Id: 6,
-      Title: 'Down gehen',
-      Description: 'Ich will einfach down gehen',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-    {
-      Id: 7,
-      Title: 'A new thread that is extremly long and really complex lol31234142134',
-      Description: 'Test desc',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-
-    {
-      Id: 8,
-      Title: 'Down gehen',
-      Description: 'Ich will einfach down gehen',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-    {
-      Id: 9,
-      Title: 'A new thread that is extremly long and really complex lol31234142134',
-      Description: 'Test desc',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    },
-
-    {
-      Id: 2,
-      Title: 'Down gehen',
-      Description: 'Ich will einfach down gehen',
-      CreationDate: this.newDate,
-      UserId: 1,
-      Username: 'Maxii'
-    }
-  ]
-  constructor() { }
+  constructor(private threadService: ThreadService) { }
 
   ngOnInit() {
+    this.threadService.getAllThreads().subscribe((data: Thread[]) =>{
+      this.threadList = data;
+    }, error => {console.log(error);})
   }
 
 }
