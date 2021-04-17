@@ -9,7 +9,7 @@ const getAllUsers = async () => {
     })*/
 }
 
-const getUserOfThread = async (userId) => {
+const getUserById = async (userId) => {
     let result = await pool.query('SELECT * FROM "Users" WHERE "Id" = $1', [userId])
 
     return result.rows[0]
@@ -21,8 +21,13 @@ const addUser =  async (user) => {
     return result.rows[0].Id
 }
 
+const deleteUser = async (userId) => {
+    let result = await pool.query('DELETE FROM "Users" WHERE "Id" = $1 RETURNING "Id"', [userId])
+    return result.rows[0].Id
+}
+
 module.exports = {
     getAllUsers: getAllUsers,
-    getUserOfThread: getUserOfThread,
+    getUserById: getUserById,
     addUser: addUser
 }
