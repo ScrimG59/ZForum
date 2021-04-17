@@ -1,8 +1,9 @@
 class Post {
-    constructor(Id, Content, User, CreationDate) {
+    constructor(Id, Content, Username, UserId, CreationDate) {
         this.Id = Id;
         this.Content = Content;
-        this.User = User;
+        this.Username = Username;
+        this.UserId = UserId;
         this.CreationDate = CreationDate;
     }
 }
