@@ -50,11 +50,7 @@ h5 {
   font-weight: bold;
   padding: 1rem;
   margin: 0;
-}
-
-h5 a {
   color: var(--clr-dark-theme-green-500);
-  text-decoration: none;
 }
 
 hr {
