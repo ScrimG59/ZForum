@@ -1,7 +1,6 @@
 import { Post } from "./post";
-import { User } from "./user";
 
-export interface Thread {
+export class Thread {
   Id: number;
   Title: string;
   Description: string;
