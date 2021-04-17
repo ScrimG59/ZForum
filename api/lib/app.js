@@ -13,8 +13,8 @@ app.use(cors())
 app.use(express.json())
 
 // Routes
-app.use('/api/users', userRoutes)
-app.use('/api/threads', threadRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/thread', threadRoutes)
 
 app.listen(port, () => {
   console.log(`App live at http://localhost:${port}`)
