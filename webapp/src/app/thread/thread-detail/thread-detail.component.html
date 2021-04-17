@@ -1,7 +1,7 @@
 <div class ="thread-detail">
   <div class="thread-item">
     <div class="title">
-      <h5><a routerLink="/thread-detail/{{ thread.Id }}">{{ thread.Title }}</a></h5>
+      <h5>{{ thread.Title }}</h5>
     </div>
     <hr>
     <div class="content">
@@ -16,7 +16,7 @@
     <h3 class="replies-header">Replies: </h3>
   </div>
   <div class="post-list">
-      <div *ngFor="let post of postList" class="post-item">
+      <div *ngFor="let post of thread.Posts" class="post-item">
         <div class="content">
           <div class="description"> {{ post.Content }}</div>
           <div class="date"> <span class="green"><br>Created on: </span>{{ post.CreationDate }}<br> <br>
