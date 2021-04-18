@@ -12,16 +12,14 @@
       </div>
     </div>
   </div>
-  <div class="replies-header-container">
-    <h3 class="replies-header">Replies: </h3>
-  </div>
+  <h3 class="replies-header">Replies: </h3>
   <div class="post-list">
       <div *ngFor="let post of thread.Posts" class="post-item">
         <div class="content">
           <div class="description"> {{ post.Content }}</div>
           <div class="date"> <span class="green"><br>Created on: </span>{{ post.CreationDate }}<br> <br>
              <span class="green">by: </span>
-              <a class="user-name" routerLink="/user-detail/{{ post.UserId }}">{{ post.Username }}</a> <br> <br>
+             <a class="user-name" routerLink="/user-detail/{{ post.UserId }}">{{ post.Username }}</a>
           </div>
         </div>
     </div>
