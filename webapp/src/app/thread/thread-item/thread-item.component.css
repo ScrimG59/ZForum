@@ -2,11 +2,11 @@
   color: white;
   width: 60vw;
   min-height: 10vh;
-  margin: 0 1rem .6rem 1rem;
+  margin: 0 1rem 0.6rem 1rem;
   border-radius: 5px;
   background-color: var(--clr-dark-theme-background-400);
   transition: transform 250ms ease-in-out;
-  box-shadow: 0px 5px 10px 5px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .thread-item:hover {
@@ -46,17 +46,19 @@ hr {
   word-break: break-all;
   font-size: 1rem;
   color: rgb(228, 228, 228);
-  padding: .5em;
+  padding: 0.5em;
   height: auto;
   padding: 1rem;
 }
 
 .date {
-  padding: .6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 0.6rem;
   color: rgb(228, 228, 228);
-  height: auto;
   border-left: 1px solid white;
-  right: 0;
+  word-break: break-all;
 }
 
 .user-name {
@@ -70,6 +72,6 @@ hr {
 
 @media screen and (max-width: 1300px) {
   .thread-item {
-    width: 69vw;
+    width: 72vw;
   }
 }
