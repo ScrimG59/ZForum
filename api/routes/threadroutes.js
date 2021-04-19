@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllThreads } = require('../services/threadservice')
+const { getAllThreads, getThreadById } = require('../services/threadservice')
 const { getUserById } = require('../services/userservice')
 const { getPostsbyThreadId } = require('../services/postservice') 
 const Thread = require('../models/thread') 
@@ -21,6 +21,16 @@ router.get('/', async (req, res) => {
     }
 
     return res.status(200).json(threadList)
+})
+
+// HTTP-Get to get one certain thread
+router.get('/:id', async (req, res) => {
+    let thread = await getThreadById(req.params.id)
+    const userOfThread = await getUserById(thread.User_Id)
+    const posts = await getPostsbyThreadId(thread.Id) 
+    const postList = await getPosts(posts)
+    const newThread = new Thread(thread.Id, thread.Title, thread.Description, thread.CreationDate, userOfThread.Forename, userOfThread.Id, thread.Content, postList)
+    return res.status(200).json(newThread)
 })
 
 // helper method to get all posts of a thread
