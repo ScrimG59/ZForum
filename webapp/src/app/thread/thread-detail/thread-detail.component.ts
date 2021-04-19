@@ -18,7 +18,7 @@ export class ThreadDetailComponent implements OnInit {
       this.thread = data['threads'];
     }, error => {
       // if there's an error, redirect to main page
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
     })
   }
 }
