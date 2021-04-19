@@ -8,6 +8,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ThreadItemComponent } from './thread/thread-item/thread-item.component';
 import { ThreadListComponent } from './thread/thread-list/thread-list.component';
 import { ThreadDetailComponent } from './thread/thread-detail/thread-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserLoginComponent } from './user/user-login/user-login.component';
+import { UserRegisterComponent } from './user/user-register/user-register.component';
+import { AlertifyService } from 'src/services/alertify.service';
+import { ThreadService } from 'src/services/thread.service';
+import { UserService } from 'src/services/user.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +22,23 @@ import { ThreadDetailComponent } from './thread/thread-detail/thread-detail.comp
     NavbarComponent,
     ThreadItemComponent,
     ThreadListComponent,
-    ThreadDetailComponent
+    ThreadDetailComponent,
+    UserDetailComponent,
+    UserLoginComponent,
+    UserRegisterComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    AlertifyService,
+    ThreadService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
