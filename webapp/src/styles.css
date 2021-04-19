@@ -1,4 +1,4 @@
-:root{
+:root {
   --clr-dark-theme-background-200: hsl(0, 0%, 43%);
   --clr-dark-theme-background-300: hsl(0, 0%, 33%);
   --clr-dark-theme-background-400: hsl(0, 0%, 13%);
@@ -7,7 +7,6 @@
   --clr-dark-theme-green-300: hsl(120, 100%, 60%);
   --clr-dark-theme-green-400: hsl(120, 100%, 40%);
   --clr-dark-theme-green-500: hsl(120, 100%, 30%);
-
 }
 
 body {
@@ -19,7 +18,17 @@ body {
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  outline: none;
 }
 
 /* width */
