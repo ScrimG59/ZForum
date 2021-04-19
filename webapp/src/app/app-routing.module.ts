@@ -11,9 +11,9 @@ const routes: Routes = [
   {path: '', component: ThreadListComponent},
   {path: 'thread-detail/:id', component: ThreadDetailComponent,
   resolve: {threads: ThreadDetailResolverService}},
-  {path: 'user-login', component: UserLoginComponent},
-  {path: 'user-register', component: UserRegisterComponent},
-  {path: 'user-detail/:id', component: UserDetailComponent}
+  {path: 'user/login', component: UserLoginComponent},
+  {path: 'user/register', component: UserRegisterComponent},
+  {path: 'user/detail/:id', component: UserDetailComponent}
 ];
 
 @NgModule({
