@@ -25,10 +25,9 @@ export class ThreadService {
   }
 
   getThreadById(id: number) {
-    return this.getAllThreads().pipe(
-      map(threadArray => {
-        const result = threadArray.find(thread => thread.Id == id);
-        return result;
+    return this.http.get(`http://localhost:3000/api/thread/${id}`).pipe(
+      map(data => {
+        return data;
       })
     );
   }
