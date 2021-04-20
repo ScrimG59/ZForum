@@ -6,7 +6,7 @@ const addRefreshToken = async (refreshToken) => {
 }
 
 const deleteRefreshToken = async(refreshToken) => {
-    let result = await pool.query('DELETE FROM "RefreshToken" WHERE "Token" = $1', [refreshToken])
+    let result = await pool.query('DELETE FROM "RefreshTokens" WHERE "Token" = $1', [refreshToken])
     return result.rows[0]
 }
 
