@@ -59,10 +59,10 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.delete('/logout', (req, res) => {
-    deleteRefreshToken(req.body.Token)
-    return res.status(200).send('Successfully logged out.')
-})
+router.post('/logout', async (req, res) => {
+    await deleteRefreshToken(req.body.RefreshToken)
+    return res.status(200).json('Successfully logged out.')
+});
 
 
 
