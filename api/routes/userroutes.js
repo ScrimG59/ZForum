@@ -1,6 +1,12 @@
+require('dotenv').config()
+
 const express = require('express')
 const router = express.Router()
 const { getAllUsers, addUser } = require('../services/userservice')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const {addRefreshToken, deleteRefreshToken} = require('../services/tokenservice')
+const generateAccessToken = require('../utils/tokenGenerator')
 
 // gets all users
 router.get('/', async (req, res) => {
@@ -9,16 +15,55 @@ router.get('/', async (req, res) => {
     res.status(200).json({
         Users: users,
     })
-  })
-  
-router.post('/register', async(req, res) => {
+})
+ 
+// HTTP-Post to register a new user  
+router.post('/register', async (req, res) => {
     const user = req.body
+    console.log(user)
+    try {
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(user.Password, salt)
+        user.Password = hashedPassword
+    }
+    catch {
+        res.status(500).send()
+    }
+
     const id = await addUser(user)
+    console.log(id)
     res.status(201).json('Created new user with ID: '+ id)
 });
 
-router.post('/login', async(req, res) => {
-    
+// HTTP-Post to login a user
+router.post('/login', async (req, res) => {
+    const userList = await getAllUsers()
+    const loggedInUser = req.body
+    const user = userList.find(u => u.Email === loggedInUser.Email)
+
+    if(!user) {
+        return res.status(400).send('Cannot find user with given email.')
+    }
+
+    try {
+        if(await bcrypt.compare(loggedInUser.Password, user.Password)) {
+            const accesstoken = generateAccessToken(user)
+            const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+            addRefreshToken(refreshToken)
+            const loginUser = {Id: user.Id, Username: user.Username, Token: accesstoken, RefreshToken: refreshToken}
+            return res.status(200).json(loginUser)
+        }
+        return res.status(400).send('Wrong password.')
+    } catch {
+        return res.status(500).send('Internal Error.')
+    }
 });
+
+router.delete('/logout', (req, res) => {
+    deleteRefreshToken(req.body.Token)
+    return res.status(200).send('Successfully logged out.')
+})
+
+
 
 module.exports = router
