@@ -1,9 +1,9 @@
-import { Post } from "./post";
+import { Post } from "./Post";
 
 export class Thread {
   Id: number;
   Title: string;
-  Description: string;
+  Content: string;
   Posts?: Post[];
   CreationDate: string;
   Username: string;
