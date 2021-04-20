@@ -16,12 +16,13 @@ const getUserById = async (userId) => {
 }
 
 const addUser =  async (user) => {
-    const result = await pool.query('INSERT INTO "Users"("Forename", "Lastname", "Email", "Password") VALUES ($1, $2, $3, $4) RETURNING "Id"', 
-    [user.Forename, user.Lastname, user.Email, user.Password])
+    const result = await pool.query('INSERT INTO "Users"("Username", "Email", "Password") VALUES ($1, $2, $3) RETURNING "Id"', 
+    [user.Username, user.Email, user.Password])
     return result.rows[0].Id
 }
 
 const deleteUser = async (userId) => {
+    // if user gets delete, all threads and posts this user created have also to get deleted
     let result = await pool.query('DELETE FROM "Users" WHERE "Id" = $1 RETURNING "Id"', [userId])
     return result.rows[0].Id
 }
