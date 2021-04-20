@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginUserResponse } from 'src/models/LoginUserResponse';
 import { AlertifyService } from 'src/services/alertify.service';
 import { UserService } from 'src/services/user.service';
 
@@ -12,6 +13,7 @@ import { UserService } from 'src/services/user.service';
 export class UserLoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  userSubmitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -19,6 +21,7 @@ export class UserLoginComponent implements OnInit {
               private alertifyService: AlertifyService) { }
 
   ngOnInit() {
+    this.createLoginForm();
   }
 
   createLoginForm() {
@@ -29,7 +32,12 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userSubmitted = true;
 
+    if(this.loginForm.valid) {
+      this.loginUser(this.loginForm.value);
+      this.userSubmitted = false;
+    }
   }
 
   onBack() {
@@ -37,7 +45,7 @@ export class UserLoginComponent implements OnInit {
   }
 
 
-   // ------------------------------------
+  // ------------------------------------
   // Getter-methods for all form controls
   // ------------------------------------
 
@@ -48,7 +56,27 @@ export class UserLoginComponent implements OnInit {
   get Password() {
     return this.loginForm.get('Password') as FormControl;
   }
+  // ------------------------------------
+
 
   // ------------------------------------
+  // Helper-methods
+  // ------------------------------------
+
+  loginUser(user) {
+    return this.userService.loginUser(user).subscribe((res: LoginUserResponse) => {
+      if(!res) {return;}
+      localStorage.setItem('token', res.Token);
+      localStorage.setItem('username', res.Username);
+      localStorage.setItem('refreshToken', res.RefreshToken);
+      localStorage.setItem('id', res.Id);
+      this.alertifyService.success('Successfully logged in.');
+      this.router.navigate(['']);
+      this.loginForm.reset();
+    }, (error) => {
+      this.alertifyService.error(error.error);
+    })
+  }
+
 
 }
