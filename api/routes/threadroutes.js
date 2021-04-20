@@ -1,10 +1,12 @@
 const express = require('express')
-const { getAllThreads, getThreadById } = require('../services/threadservice')
+const { getAllThreads, getThreadById, addThread } = require('../services/threadservice')
 const { getUserById } = require('../services/userservice')
 const { getPostsbyThreadId } = require('../services/postservice') 
 const Thread = require('../models/thread') 
 const Post = require('../models/post')
 const router = express.Router()
+const authenticate = require('../middlewares/authentication')
+
 
 // HTTP-Get to get all Threads
 router.get('/', async (req, res) => {
@@ -15,7 +17,7 @@ router.get('/', async (req, res) => {
         const userOfThread = await getUserById(thread.User_Id)
         const posts = await getPostsbyThreadId(thread.Id) 
         const postList = await getPosts(posts)
-        const newThread = new Thread(thread.Id, thread.Title, thread.Description, thread.CreationDate, userOfThread.Forename, userOfThread.Id, thread.Content, postList)
+        const newThread = new Thread(thread.Id, thread.Title, thread.Description, thread.CreationDate, userOfThread.Username, userOfThread.Id, thread.Content, postList)
 
         threadList.push(newThread)
     }
@@ -24,14 +26,27 @@ router.get('/', async (req, res) => {
 })
 
 // HTTP-Get to get one certain thread
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
     let thread = await getThreadById(req.params.id)
+    if(!thread) {
+        return res.status(400).json('No thread found with given Id found.')
+    }
     const userOfThread = await getUserById(thread.User_Id)
     const posts = await getPostsbyThreadId(thread.Id) 
     const postList = await getPosts(posts)
-    const newThread = new Thread(thread.Id, thread.Title, thread.Description, thread.CreationDate, userOfThread.Forename, userOfThread.Id, thread.Content, postList)
+    const newThread = new Thread(thread.Id, thread.Title, thread.Description, thread.CreationDate, userOfThread.Username, userOfThread.Id, thread.Content, postList)
     return res.status(200).json(newThread)
 })
+
+// HTTP-Post to add a new thread
+router.post('/add', authenticate, async (req, res) => {
+    let id = await addThread(req.body);
+    if(id) {
+        return res.status(201).json(`Created a new thread with the Id of ${id}`);
+    }
+    return res.status(400).json('Something went wrong. Try again.');
+})
+
 
 // helper method to get all posts of a thread
 const getPosts = async (posts) => {
@@ -46,7 +61,5 @@ const getPosts = async (posts) => {
 
     return postList
 }
-
-router.get('/:id')
 
 module.exports = router
