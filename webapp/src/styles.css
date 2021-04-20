@@ -1,3 +1,6 @@
+@import "../node_modules/alertifyjs/build/css/alertify.min.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+
 :root {
   --clr-dark-theme-background-200: hsl(0, 0%, 43%);
   --clr-dark-theme-background-300: hsl(0, 0%, 33%);
@@ -15,6 +18,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 * {
@@ -23,12 +27,22 @@ body {
   margin: 0;
 }
 
+ul {
+  list-style: none;
+}
+
 input:focus {
   outline: none;
 }
 
 button {
   outline: none;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
 }
 
 /* width */
