@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Thread } from 'src/models/thread';
+import { Thread } from 'src/models/Thread';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

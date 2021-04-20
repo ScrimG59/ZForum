@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Thread } from 'src/models/thread';
+import { Thread } from 'src/models/Thread';
 
 @Component({
   selector: 'app-thread-item',

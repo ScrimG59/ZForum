@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Thread } from 'src/models/thread';
+import { Thread } from 'src/models/Thread';
 import { ThreadService } from 'src/services/thread.service';
 
 @Component({

@@ -5,7 +5,7 @@
     </div>
     <hr>
     <div class="content">
-      <div class="description"> {{ thread.Description }}</div>
+      <div class="description"> {{ thread.Content }}</div>
       <div class="date"> <span class="green"><br>Created on: </span>{{ thread.CreationDate }} <br> <br>
          <span class="green">by: </span>
           <a class="user-name" routerLink="/user-detail/{{ thread.UserId }}">{{ thread.Username }}</a>

@@ -2,7 +2,7 @@
     <h5><a routerLink="/thread-detail/{{ thread.Id }}">{{ thread.Title }}</a></h5>
   <hr>
   <div class="content">
-    <div class="description"> {{ thread.Description }}</div>
+    <div class="description"> {{ thread.Content }}</div>
     <div class="date"> <span class="green">Created on: </span>{{ thread.CreationDate }} <br>
        <span class="green">by: </span>
         <a class="user-name" routerLink="/user-detail/{{ thread.UserId }}">{{ thread.Username }}</a>
