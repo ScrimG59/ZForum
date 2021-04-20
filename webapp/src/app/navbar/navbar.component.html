@@ -1,17 +1,26 @@
 <nav class="navbar">
   <ul class="navbar-nav">
     <li class="navbar-item">
-      <a href="" class="logo"><span class="Z">Z</span>Forum</a>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <a routerLink="" class="logo"><span class="Z">Z</span>Forum</a>
     </li>
     <li class="navbar-item">
       <div class="user-controls">
-        <a routerLink="/user/login">Login</a>
-        <a routerLink="/user/register">Register</a>
+        <a *ngIf="!loggedIn()" routerLink="/user/login">Login</a>
+        <a *ngIf="!loggedIn()" routerLink="/user/register">Register</a>
+        <a (click)="onMouseClick()" (mouseleave)="onMouseLeave()" *ngIf="loggedIn()" class="dropdown"> Welcome, {{ loggedInUserName }} &#5121;
+          <ul *ngIf="loggedIn()" class="dropdown-menu">
+            <li class="dropdown-item">
+              <a routerLink="/user/detail">My Account</a>
+            </li>
+            <li class="dropdown-item">
+              <a routerLink="/thread/add">Create a Thread</a>
+            </li>
+            <li class="dropdown-item logout">
+              <a (click)="onLogout()">Logout</a>
+            </li>
+          </ul>
+        </a>
       </div>
     </li>
   </ul>
 </nav>
-<label for="nav-toggle" class="nav-toggle-label">
-  <span></span>
-</label>
