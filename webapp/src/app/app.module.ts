@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { AlertifyService } from 'src/services/alertify.service';
 import { ThreadService } from 'src/services/thread.service';
 import { UserService } from 'src/services/user.service';
+import { HttpErrorInterceptorService } from 'src/services/httperror-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,12 @@ import { UserService } from 'src/services/user.service';
   providers: [
     AlertifyService,
     ThreadService,
-    UserService
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
