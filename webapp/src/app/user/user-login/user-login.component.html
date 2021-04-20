@@ -8,7 +8,7 @@
           <input type="text" formControlName="Email">
           <span class="text">Email</span>
           <span class="line"></span>
-          <span class="error-block" *ngIf="!Email.valid && Email.touched">
+          <span class="error-block" *ngIf="!Email.valid && (Email.touched || userSubmitted)">
             <span *ngIf="Email.hasError('required')">
               An email is required.
             </span>
@@ -21,7 +21,7 @@
           <input type="password" formControlName="Password">
           <span class="text">Password</span>
           <span class="line"></span>
-          <span class="error-block" *ngIf="!Password.valid && Password.touched">
+          <span class="error-block" *ngIf="!Password.valid && (Password.touched || userSubmitted)">
             <span *ngIf="Password.hasError('required')">
               A password is required.
             </span>
