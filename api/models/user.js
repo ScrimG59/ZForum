@@ -1,8 +1,7 @@
 class User {
-    constructor(Id, Forename, Lastname, Email, Password) {
+    constructor(Id, Username, Email, Password) {
         this.Id = Id;
-        this.Forename = Forename;
-        this.Lastname = Lastname;
+        this.Username = Username;
         this.Email = Email;
         this.Password = Password;
     }
