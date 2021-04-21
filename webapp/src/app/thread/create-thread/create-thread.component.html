@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="header">Create own thread</h3>
+    <hr>
+    <div class="form">
+      <form [formGroup]="threadForm" (ngSubmit)="onSubmit()">
+        <div class="form-input">
+          <input type="text" formControlName="Title">
+          <span class="text">Title</span>
+          <span class="line"></span>
+          <span class="error-block" *ngIf="!Title.valid && (Title.touched || userSubmitted)">
+            <span *ngIf="Title.hasError('required')">
+              A title is required.
+            </span>
+            <span  *ngIf="Title.hasError('minlength')">
+              Title has to have at least 4 characters.
+            </span>
+          </span>
+        </div>
+        <div class="form-input">
+          <textarea placeholder="Write here..." class="create-thread-textarea" formControlName="Content"></textarea>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-submit">Create</button>
+          <button type="button" (click)="onBack()" class="btn btn-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
