@@ -5,22 +5,15 @@
     <div class="form">
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="form-input">
-          <input type="text" formControlName="Forename">
-          <span class="text">Forename</span>
+          <input type="text" formControlName="Username">
+          <span class="text">Username</span>
           <span class="line"></span>
-          <span class="error-block" *ngIf="!Forename.valid && (Forename.touched || userSubmitted)">
-            <span *ngIf="Forename.hasError('required')">
-              A forename is required.
+          <span class="error-block" *ngIf="!Username.valid && (Username.touched || userSubmitted)">
+            <span *ngIf="Username.hasError('required')">
+              An user is required.
             </span>
-          </span>
-        </div>
-        <div class="form-input">
-          <input type="text" formControlName="Lastname">
-          <span class="text">Lastname</span>
-          <span class="line"></span>
-          <span class="error-block" *ngIf="!Lastname.valid && (Lastname.touched || userSubmitted)">
-            <span *ngIf="Lastname.hasError('required')">
-              A lastname is required.
+            <span  *ngIf="Username.hasError('minlength')">
+              Username has to have at least 4 characters.
             </span>
           </span>
         </div>
@@ -58,7 +51,7 @@
             <span *ngIf="ConfirmPassword.hasError('required')">
               Please confirm your password.
             </span>
-            <span *ngIf="registrationForm.hasError('notMatched') && ConfirmPassword.valid">
+            <span *ngIf="registrationForm.hasError('notMatched') && ConfirmPassword.valid" class="error-block">
               Passwords don't match.
             </span>
           </span>
