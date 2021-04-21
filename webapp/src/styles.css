@@ -47,14 +47,13 @@ a {
 
 textarea {
   border: 1px solid white;
-  border-radius: 5px;
+  border-radius: 2px;
   background-color: var(--clr-dark-theme-background-400);
   outline: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   color: white;
-  padding: 0.5rem;
   font-size: 1.2rem;
 }
 
@@ -62,7 +61,7 @@ textarea {
   border: none;
   padding: 1rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   font-weight: bold;
 }
 
@@ -88,7 +87,7 @@ textarea {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 
 /* Handle on hover */
