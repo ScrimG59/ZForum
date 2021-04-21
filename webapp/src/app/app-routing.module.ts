@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from 'src/services/auth-guard.service';
+import { CreateThreadComponent } from './thread/create-thread/create-thread.component';
 import { ThreadDetailResolverService } from './thread/thread-detail/thread-detail-resolver.service';
 import { ThreadDetailComponent } from './thread/thread-detail/thread-detail.component';
 import { ThreadListComponent } from './thread/thread-list/thread-list.component';
@@ -9,11 +11,13 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 
 const routes: Routes = [
   {path: '', component: ThreadListComponent},
-  {path: 'thread-detail/:id', component: ThreadDetailComponent,
+  {path: 'thread/detail/:id', component: ThreadDetailComponent,
   resolve: {threads: ThreadDetailResolverService}},
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},
-  {path: 'user/detail/:id', component: UserDetailComponent}
+  {path: 'user/detail/:id', component: UserDetailComponent},
+  {path: 'thread/create', component: CreateThreadComponent,
+  canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
