@@ -41,8 +41,7 @@ router.get('/:id', async (req, res) => {
 // HTTP-Post to add a new thread
 router.post('/add', authenticate, async (req, res) => {
     const thread = req.body
-    console.log(thread)
-    let id = await addThread(req.body)
+    let id = await addThread(thread)
     if(id) {
         return res.status(201).json(id)
     }
