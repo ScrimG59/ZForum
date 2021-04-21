@@ -12,7 +12,7 @@ const getThreadById = async (id) => {
 
 const addThread = async(thread) => {
     let result = await pool.query('INSERT INTO "Threads"("Title", "User_Id", "Content", "CreationDate") VALUES ($1, $2, $3, $4) RETURNING "Id"', 
-                [thread.Title, thread.User_Id, thread.Content, thread.CreationDate]);
+                [thread.Title, thread.UserId, thread.Content, thread.CreationDate]);
     return result.rows[0].Id;
 }
 
