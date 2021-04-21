@@ -1,5 +1,5 @@
 export class Post {
-  Id: number;
+  Id: string;
   Content: string;
   UserId: number;
   Username: string;
