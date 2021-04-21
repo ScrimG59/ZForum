@@ -17,6 +17,7 @@ import { ThreadService } from 'src/services/thread.service';
 import { UserService } from 'src/services/user.service';
 import { HttpErrorInterceptorService } from 'src/services/httperror-interceptor.service';
 import { TokenService } from 'src/services/token.service';
+import { PostService } from 'src/services/post.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TokenService } from 'src/services/token.service';
     ThreadService,
     UserService,
     TokenService,
+    PostService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptorService,
