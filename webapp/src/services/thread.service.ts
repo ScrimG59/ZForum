@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { CreateThread } from 'src/models/CreateThread';
 import { Thread } from 'src/models/Thread';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Thread } from 'src/models/Thread';
 })
 export class ThreadService {
 
-  header = new HttpHeaders()
+  header = new HttpHeaders();
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +32,11 @@ export class ThreadService {
         return data;
       })
     );
+  }
+
+  addThread(thread: CreateThread) {
+    this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.http.post('http://localhost:3000/api/thread/add', thread, {'headers': this.header});
   }
 
 }
