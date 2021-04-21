@@ -2,4 +2,7 @@
   <div *ngFor="let thread of threadList">
     <app-thread-item [thread]="thread"></app-thread-item>
   </div>
+  <div *ngIf="loggedIn()" class="button-container">
+    <button routerLink="/thread/create" type="button" class="btn btn-submit">Create a thread</button>
+  </div>
 </div>
