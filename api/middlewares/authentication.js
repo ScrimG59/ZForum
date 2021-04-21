@@ -14,8 +14,6 @@ const authenticate = (req, res, next) => {
       if(err) {
           return res.sendStatus(403)
       } 
-      req.body = user
-      console.log(user)
       next()
   })
 }
