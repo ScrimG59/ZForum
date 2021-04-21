@@ -18,6 +18,7 @@ import { UserService } from 'src/services/user.service';
 import { HttpErrorInterceptorService } from 'src/services/httperror-interceptor.service';
 import { TokenService } from 'src/services/token.service';
 import { PostService } from 'src/services/post.service';
+import { CreateThreadComponent } from './thread/create-thread/create-thread.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PostService } from 'src/services/post.service';
     ThreadDetailComponent,
     UserDetailComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    CreateThreadComponent
    ],
   imports: [
     BrowserModule,
