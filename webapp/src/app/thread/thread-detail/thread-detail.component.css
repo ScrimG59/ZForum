@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .replies-header {
@@ -80,7 +81,25 @@ hr {
   color: var(--clr-dark-theme-green-500);
 }
 
+.create-post-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  justify-content: left;
+}
+
+.create-post-textarea {
+  min-height: 20vh;
+  width: 35vw;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  max-width: 9rem;
+}
+
 @media screen and (max-width: 1300px) {
-  .post-item {
+  .create-post-textarea {
+    width: 50vw;
   }
 }
