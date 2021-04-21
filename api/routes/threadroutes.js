@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 })
 
 // HTTP-Get to get one certain thread
-router.get('/:id', authenticate, async (req, res) => {
+router.get('/:id', async (req, res) => {
     let thread = await getThreadById(req.params.id)
     if(!thread) {
         return res.status(400).json('No thread found with given Id found.')
@@ -54,7 +54,7 @@ const getPosts = async (posts) => {
 
     for(post of posts) {
         const userOfPost = await getUserById(post.User_Id)
-        const newPost = new Post(post.Id, post.Content, userOfPost.Forename, userOfPost.Id, post.CreationDate)
+        const newPost = new Post(post.Id, post.Content, userOfPost.Username, userOfPost.Id, post.CreationDate)
 
         postList.push(newPost)
     }
