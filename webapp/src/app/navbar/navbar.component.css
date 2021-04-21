@@ -4,6 +4,10 @@
   height: 5rem;
   background-color: var(--clr-dark-theme-background-400);
   box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.75);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .navbar-nav {
