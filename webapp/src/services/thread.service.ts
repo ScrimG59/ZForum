@@ -26,9 +26,7 @@ export class ThreadService {
   }
 
   getThreadById(id: number) {
-    this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    console.log(this.header)
-    return this.http.get(`http://localhost:3000/api/thread/${id}`, {'headers': this.header}).pipe(
+    return this.http.get(`http://localhost:3000/api/thread/${id}`).pipe(
       map(data => {
         return data;
       })
