@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     const foundUser = userList.find(u => u.Email === user.Email || u.Username === user.Username)
 
     if(foundUser) {
-        res.status(400).send('User with given Username or Email already exists.')
+        return res.status(400).send('User with given Username or Email already exists.')
     }
 
     try {
