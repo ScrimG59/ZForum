@@ -4,3 +4,9 @@
   align-items: center;
   width: 100%;
 }
+
+.button-container {
+  display: flex;
+  width: 60vw;
+  justify-content: flex-start;
+}
