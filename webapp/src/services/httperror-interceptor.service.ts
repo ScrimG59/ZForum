@@ -31,6 +31,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
       concatMap((checkError: HttpErrorResponse, count: number) => {
         if(count <= retryCount) {
           const refreshToken = localStorage.getItem('refreshToken');
+          // if token expired
           if(checkError.status === 403 && refreshToken) {
             this.tokenService.getNewToken(refreshToken).subscribe(data => {
               console.log(data.toString())
