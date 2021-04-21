@@ -13,7 +13,14 @@ const getLatestPosts = async () => {
     return result.rows
 }
 
+const addPost = async (post) => {
+    const result = await pool.query('INSERT INTO "Posts"("Content", "User_Id", "Thread_Id", "CreationDate") VALUES ($1, $2, $3, $4) RETURNING "Id"', 
+                                    [post.Content, post.UserId, post.ThreadId, post.CreationDate])
+    return result.rows[0].Id
+}
+
 module.exports = {
     getPostsbyThreadId: getPostsbyThreadId,
-    getLatestPosts: getLatestPosts
+    getLatestPosts: getLatestPosts,
+    addPost: addPost
 }
