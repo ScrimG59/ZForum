@@ -27,14 +27,11 @@ export class UserRegisterComponent implements OnInit {
 
   createRegistrationForm() {
     this.registrationForm = this.formBuilder.group({
-      Forename: new FormControl(null, Validators.required),
-      Lastname: new FormControl(null, Validators.required),
+      Username: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       Email: new FormControl(null, [Validators.required, Validators.email]),
       Password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      ConfirmPassword: new FormControl(null, Validators.required)
-    });
-
-    this.registrationForm.setValidators(this.passwordMatchingValidator);
+      ConfirmPassword: new FormControl(null, [Validators.required])
+    }, {validators: this.passwordMatchingValidator});
   }
 
   // a custom validator that checks if the content of "confirmPassword"-FormControl matches the content of "userPassword"-FormControl
@@ -50,10 +47,9 @@ export class UserRegisterComponent implements OnInit {
         this.registrationForm.reset();
         this.userSubmitted = false;
         this.alertifyService.success('Successfully registered!');
-        return;
+        this.router.navigate(['']);
       });
     }
-    this.alertifyService.error('Something went wrong. Try again later.')
   }
 
   onBack() {
@@ -62,8 +58,7 @@ export class UserRegisterComponent implements OnInit {
 
   createUser() {
     return this.user = {
-      Forename: this.Forename.value,
-      Lastname: this.Lastname.value,
+      Username: this.Username.value,
       Email: this.Email.value,
       Password: this.Password.value
     }
@@ -73,12 +68,8 @@ export class UserRegisterComponent implements OnInit {
   // Getter-methods for all form controls
   // ------------------------------------
 
-  get Forename() {
-    return this.registrationForm.get('Forename') as FormControl;
-  }
-
-  get Lastname() {
-    return this.registrationForm.get('Lastname') as FormControl;
+  get Username() {
+    return this.registrationForm.get('Username') as FormControl;
   }
 
   get Password() {
