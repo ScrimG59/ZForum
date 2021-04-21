@@ -5,7 +5,8 @@ const cors = require('cors')
 const userRoutes = require('../routes/userroutes')
 const threadRoutes = require('../routes/threadroutes')
 const tokenRoutes = require('../routes/tokenroutes')
-
+const postRoutes = require('../routes/postroutes')
+ 
 // setting up the port of api
 const port = 3000
 
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use('/api/user', userRoutes)
 app.use('/api/thread', threadRoutes)
 app.use('/api/token', tokenRoutes)
+app.use('/api/post', postRoutes)
 
 app.listen(port, () => {
   console.log(`App live at http://localhost:${port}`)
