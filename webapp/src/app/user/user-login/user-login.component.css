@@ -89,21 +89,7 @@ input:focus ~ .line {
 }
 
 .btn {
-  border: none;
-  padding: 1rem;
-  cursor: pointer;
-  border-radius: 10px;
   margin: 0 0.5rem 0 1rem;
-  font-weight: bold;
-}
-
-.btn-submit {
-  background-color: var(--clr-dark-theme-green-400);
-  text-transform: uppercase;
-}
-
-.btn-cancel {
-  background-color: var(--clr-dark-theme-background-200);
 }
 
 .error-block {
