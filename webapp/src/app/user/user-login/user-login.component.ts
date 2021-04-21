@@ -73,8 +73,6 @@ export class UserLoginComponent implements OnInit {
       this.alertifyService.success('Successfully logged in.');
       this.router.navigate(['']);
       this.loginForm.reset();
-    }, (error) => {
-      this.alertifyService.error(error.error);
     })
   }
 
