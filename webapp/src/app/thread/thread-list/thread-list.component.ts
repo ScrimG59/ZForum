@@ -11,6 +11,7 @@ export class ThreadListComponent implements OnInit {
 
   newDate = new Date().toLocaleString();
   threadList: Thread[];
+  loggedInUser: boolean = false;
 
   constructor(private threadService: ThreadService) { }
 
@@ -18,6 +19,12 @@ export class ThreadListComponent implements OnInit {
     this.threadService.getAllThreads().subscribe((data: Thread[]) =>{
       this.threadList = data;
     }, error => {console.log(error);})
+  }
+
+  loggedIn() {
+    if(localStorage.getItem('username')) {
+      return this.loggedInUser = true;
+    }
   }
 
 }
