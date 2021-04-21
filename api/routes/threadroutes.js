@@ -40,11 +40,13 @@ router.get('/:id', async (req, res) => {
 
 // HTTP-Post to add a new thread
 router.post('/add', authenticate, async (req, res) => {
-    let id = await addThread(req.body);
+    const thread = req.body
+    console.log(thread)
+    let id = await addThread(req.body)
     if(id) {
-        return res.status(201).json(`Created a new thread with the Id of ${id}`);
+        return res.status(201).json(id)
     }
-    return res.status(400).json('Something went wrong. Try again.');
+    return res.status(400).json('Something went wrong. Try again.')
 })
 
 
