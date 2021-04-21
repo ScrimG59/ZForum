@@ -20,7 +20,13 @@ router.get('/', async (req, res) => {
 // HTTP-Post to register a new user  
 router.post('/register', async (req, res) => {
     const user = req.body
-    console.log(user)
+    const userList = await getAllUsers()
+    const foundUser = userList.find(u => u.Email === user.Email || u.Username === user.Username)
+
+    if(foundUser) {
+        res.status(400).send('User with given Username or Email already exists.')
+    }
+
     try {
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(user.Password, salt)
