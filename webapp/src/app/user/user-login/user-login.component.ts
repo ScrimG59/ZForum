@@ -67,9 +67,7 @@ export class UserLoginComponent implements OnInit {
     return this.userService.loginUser(user).subscribe((res: LoginUserResponse) => {
       if(!res) {return;}
       localStorage.setItem('token', res.Token);
-      localStorage.setItem('username', res.Username);
       localStorage.setItem('refreshToken', res.RefreshToken);
-      localStorage.setItem('id', res.Id);
       this.alertifyService.success('Successfully logged in.');
       this.router.navigate(['']);
       this.loginForm.reset();
