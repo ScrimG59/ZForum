@@ -1,19 +1,33 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { DecodedToken } from 'src/models/DecodedToken';
+import jwt_decode from 'jwt-decode';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
+  header: HttpHeaders = new HttpHeaders();
+
   constructor(private http: HttpClient) { }
 
+  getInfo(): DecodedToken {
+    const token = localStorage.getItem('token');
+    const decodedToken: DecodedToken = jwt_decode(token);
+    return decodedToken;
+  }
+
+  checkToken(token: string) {
+    this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get('http://localhost:3000/api/authenticate', { 'headers': this.header});
+  }
+
   getNewToken(refreshToken: string) {
-    return this.http.post('http://localhost:3000/api/token', {'RefreshToken': localStorage.getItem('refreshToken')}).pipe(
-      map(data => {
-        return data;
-      })
-    );
+    return this.http.post('http://localhost:3000/api/token', {'RefreshToken': refreshToken});
+  }
+
+  checkRefreshToken(refreshToken: string) {
+    return this.http.post('http://localhost:3000/api/token', {'RefreshToken': refreshToken});
   }
 }
