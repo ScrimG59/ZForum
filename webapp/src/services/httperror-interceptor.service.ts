@@ -14,13 +14,23 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
   constructor(private alertifyService: AlertifyService, private tokenService: TokenService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
+    request = this.addToken(request, localStorage.getItem('token'));
     return next.handle(request).pipe(
-      retryWhen(error => this.retryRequest(error, 5)),
       catchError((error: HttpErrorResponse) => {
-        const errorMessage = this.setError(error);
-        console.log(error);
-        this.alertifyService.error(errorMessage);
-        return throwError(errorMessage);
+        const refreshToken = localStorage.getItem('refreshToken');
+        // if token expired
+        if(error.status === 403 && refreshToken) {
+          console.log(`Previous: ${localStorage.getItem('token')}`);
+          this.tokenService.getNewToken(refreshToken).subscribe((data: string) => {
+            localStorage.setItem('token', data);
+            console.log(`After: ${localStorage.getItem('token')}`);
+          })
+          return next.handle(this.addToken(request, localStorage.getItem('token')));
+        }
+          console.log(error);
+          const errorMessage = this.setError(error);
+          this.alertifyService.error(errorMessage);
+          return throwError(errorMessage);
       })
     );
   }
@@ -30,18 +40,12 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
     return error.pipe(
       concatMap((checkError: HttpErrorResponse, count: number) => {
         if(count <= retryCount) {
-          const refreshToken = localStorage.getItem('refreshToken');
-          // if token expired
-          if(checkError.status === 403 && refreshToken) {
-            this.tokenService.getNewToken(refreshToken).subscribe(data => {
-              console.log(data.toString())
-              localStorage.setItem('token', data.toString());
-              window.location.reload();
-            })
-          }
           return of(checkError);
         }
-        return throwError(checkError);
+        else {
+          console.log('Hier')
+          return throwError(checkError);
+        }
       })
     );
   }
@@ -61,5 +65,9 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
     }
 
     return errorMessage;
+  }
+
+  addToken(request: HttpRequest<any>, token: string) {
+    return request.clone({setHeaders: {'Authorization': `Bearer ${token}`}});
   }
 }
