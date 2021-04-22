@@ -27,7 +27,7 @@ export class UserService {
   }
 
   getUserPrivate(id: number) {
-    this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get(`http://localhost:3000/api/user/account/${id}`, { 'headers': this.header });
   }
 }
