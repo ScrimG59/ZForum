@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { CreateThread } from 'src/models/CreateThread';
 import { ThreadService } from 'src/services/thread.service';
+import { TokenService } from 'src/services/token.service';
 
 @Component({
   selector: 'app-create-thread',
@@ -17,7 +18,8 @@ export class CreateThreadComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private threadService: ThreadService) { }
+              private threadService: ThreadService,
+              private tokenService: TokenService) { }
 
   ngOnInit() {
     this.createThreadForm();
@@ -38,7 +40,7 @@ export class CreateThreadComponent implements OnInit {
       this.newThread = {
         Title: this.Title.value,
         Content: this.Content.value,
-        UserId: +localStorage.getItem('id'),
+        UserId: this.tokenService.getInfo().Id,
         CreationDate: Date().toLocaleString().split('GMT')[0]
       }
       this.threadService.addThread(this.newThread).subscribe((data:number) => {

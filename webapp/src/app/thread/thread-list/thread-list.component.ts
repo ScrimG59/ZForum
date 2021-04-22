@@ -22,7 +22,7 @@ export class ThreadListComponent implements OnInit {
   }
 
   loggedIn() {
-    if(localStorage.getItem('username')) {
+    if(localStorage.getItem('token') && localStorage.getItem('refreshToken')) {
       return this.loggedInUser = true;
     }
   }

@@ -5,6 +5,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { PostService } from 'src/services/post.service';
 import { CreatePost } from 'src/models/CreatePost';
 import { AlertifyService } from 'src/services/alertify.service';
+import { TokenService } from 'src/services/token.service';
+import { AuthenticationGuardService } from 'src/services/auth-guard.service';
 
 @Component({
   selector: 'app-thread-detail',
@@ -22,7 +24,9 @@ export class ThreadDetailComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private postService: PostService,
-              private alertifyService: AlertifyService) {}
+              private alertifyService: AlertifyService,
+              private tokenService: TokenService,
+              private authenticationGuardService: AuthenticationGuardService) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: Thread) => {
@@ -41,22 +45,22 @@ export class ThreadDetailComponent implements OnInit {
   }
 
   loggedIn() {
-    if(localStorage.getItem('id')) {
+    if(localStorage.getItem('token') && localStorage.getItem('refreshToken')) {
       return this.loggedInUser = true;
     }
   }
 
   onSubmit() {
     if(this.loggedIn() && this.postForm.valid) {
-      console.log('test');
       this.post = {
         Content: this.Content.value,
-        UserId: +localStorage.getItem('id'),
+        UserId: this.tokenService.getInfo().Id,
         ThreadId: this.route.snapshot.params['id'],
         CreationDate: Date().toLocaleString().split('GMT')[0]
       }
       this.postService.addPost(this.post).subscribe(data => {
         window.location.reload();
+        this.alertifyService.success('Successfully posted!');
       });
     }
   }
