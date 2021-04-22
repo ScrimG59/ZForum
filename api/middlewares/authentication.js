@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const { getUserById } = require('../services/userservice')
 
 const authenticate = (req, res, next) => {
   const authHeader = req.headers['authorization']
@@ -7,13 +8,19 @@ const authenticate = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1]
 
   if(token === null) {
-      return res.sendStatus(401);
+      return res.status(401).send('Header is empty.')
   }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
       if(err) {
-          return res.sendStatus(403)
-      } 
+        return res.status(403).send('Not valid token.')
+      }
+
+      // ensure that this user exists in the database
+      const userFromDb = await getUserById(user.Id)
+      if(!userFromDb) {
+        return res.status(403).send('User in token couldnt be found in database.')
+      }
       next()
   })
 }
