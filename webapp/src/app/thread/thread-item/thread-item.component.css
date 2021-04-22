@@ -75,3 +75,9 @@ hr {
     width: 72vw;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .thread-item {
+    width: 90vw;
+  }
+}
