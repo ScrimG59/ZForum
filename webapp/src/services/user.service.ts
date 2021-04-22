@@ -1,13 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { LoginUser } from 'src/models/LoginUser';
-import { RefreshToken } from 'src/models/RefreshToken';
 import { RegisterUser } from 'src/models/RegisterUser';
+import { User } from 'src/models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  header: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +22,12 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/login', body);
   }
 
-  logoutUser(token: RefreshToken) {
-    return this.http.post('http://localhost:3000/api/user/logout', token);
+  logoutUser(refreshToken: string) {
+    return this.http.post('http://localhost:3000/api/user/logout', {'RefreshToken': refreshToken});
+  }
+
+  getUserPrivate(id: number) {
+    this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get(`http://localhost:3000/api/user/account/${id}`, { 'headers': this.header });
   }
 }
