@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="header">Your account-details</h3>
+    <hr>
+    <div class="form">
+      <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+        <div class="form-input">
+          <input type="text" formControlName="Username">
+          <span class="text">Username</span>
+          <span class="error-block" *ngIf="!Username.valid && (Username.touched || userSubmitted)">
+            <span *ngIf="Username.hasError('required')">
+              An user is required.
+            </span>
+            <span  *ngIf="Username.hasError('minlength')">
+              Username has to have at least 4 characters.
+            </span>
+          </span>
+        </div>
+        <div class="form-input">
+          <input type="text" formControlName="Email">
+          <span class="text">Email</span>
+          <span class="error-block" *ngIf="!Email.valid && (Email.touched || userSubmitted)">
+            <span *ngIf="Email.hasError('required')">
+              An email is required.
+            </span>
+            <span *ngIf="Email.hasError('email')">
+              An valid email is required.
+            </span>
+          </span>
+        </div>
+        <div class="form-input">
+          <input type="password" formControlName="Password">
+          <span class="text">Password</span>
+          <span class="error-block" *ngIf="!Password.valid && (Password.touched || userSubmitted)">
+            <span *ngIf="Password.hasError('required')">
+              A password is required.
+            </span>
+            <span *ngIf="Password.hasError('minlength')">
+              A password has to be at least 8 characters long.
+            </span>
+          </span>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" [disabled]="!checkIfChanged()" class="btn btn-submit">Save Changes</button>
+          <button type="button" (click)="onBack()" class="btn btn-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
