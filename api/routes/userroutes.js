@@ -2,19 +2,30 @@ require('dotenv').config()
 
 const express = require('express')
 const router = express.Router()
-const { getAllUsers, addUser } = require('../services/userservice')
+const { getAllUsers, addUser, getUserById } = require('../services/userservice')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {addRefreshToken, deleteRefreshToken} = require('../services/tokenservice')
 const generateAccessToken = require('../utils/tokenGenerator')
+const authenticate = require('../middlewares/authentication')
 
 // gets all users
 router.get('/', async (req, res) => {
     let users = await getAllUsers()
-    console.log(users)
     res.status(200).json({
         Users: users,
     })
+})
+
+// gets certain user by id
+router.get('/account/:id', authenticate, async (req, res) => {
+    const userId = req.params.id
+    const user = await getUserById(userId)
+    if(user) {
+        console.log(user)
+        return res.status(200).json(user)
+    }
+    return res.status(400).send('User not found')
 })
  
 // HTTP-Post to register a new user  
@@ -56,7 +67,7 @@ router.post('/login', async (req, res) => {
             const accesstoken = generateAccessToken(user)
             const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
             addRefreshToken(refreshToken)
-            const loginUser = {Id: user.Id, Username: user.Username, Token: accesstoken, RefreshToken: refreshToken}
+            const loginUser = {Token: accesstoken, RefreshToken: refreshToken}
             return res.status(200).json(loginUser)
         }
         return res.status(400).send('Wrong password.')
@@ -69,7 +80,5 @@ router.post('/logout', async (req, res) => {
     await deleteRefreshToken(req.body.RefreshToken)
     return res.status(200).json('Successfully logged out.')
 });
-
-
 
 module.exports = router
