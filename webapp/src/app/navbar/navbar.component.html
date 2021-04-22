@@ -9,7 +9,7 @@
         <a *ngIf="!loggedIn()" routerLink="/user/register">Register</a>
         <a (click)="onMouseClick()" (mouseleave)="onMouseLeave()" *ngIf="loggedIn()" class="dropdown"> Welcome, {{ loggedInUserName }} &#5121;
           <ul *ngIf="loggedIn()" class="dropdown-menu">
-            <li routerLink="/user/detail" class="dropdown-item">
+            <li routerLink="/user/account" class="dropdown-item">
               <a>My Account</a>
             </li>
             <li (click)="onLogout()" class="dropdown-item logout">
