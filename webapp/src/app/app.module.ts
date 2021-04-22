@@ -19,6 +19,8 @@ import { HttpErrorInterceptorService } from 'src/services/httperror-interceptor.
 import { TokenService } from 'src/services/token.service';
 import { PostService } from 'src/services/post.service';
 import { CreateThreadComponent } from './thread/create-thread/create-thread.component';
+import { UserAccountComponent } from './user/user-account/user-account.component';
+import { AuthenticationGuardService } from 'src/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CreateThreadComponent } from './thread/create-thread/create-thread.comp
     UserDetailComponent,
     UserLoginComponent,
     UserRegisterComponent,
-    CreateThreadComponent
+    CreateThreadComponent,
+    UserAccountComponent
    ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { CreateThreadComponent } from './thread/create-thread/create-thread.comp
     UserService,
     TokenService,
     PostService,
+    AuthenticationGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptorService,
