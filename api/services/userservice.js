@@ -27,8 +27,14 @@ const deleteUser = async (userId) => {
     return result.rows[0].Id
 }
 
+const editUser = async (user) => {
+    let result = await pool.query('UPDATE "Users" SET "Username" = $1, "Email" = $2, "Password" = $3 WHERE "Id" = $4 RETURNING "Id"', [user.Username, user.Email, user.Password, user.Id])
+    return result.rows[0].Id
+}
+
 module.exports = {
     getAllUsers: getAllUsers,
     getUserById: getUserById,
-    addUser: addUser
+    addUser: addUser,
+    editUser: editUser
 }
