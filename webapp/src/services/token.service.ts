@@ -18,6 +18,18 @@ export class TokenService {
     return decodedToken;
   }
 
+  getAccessToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  getRefreshToken(): string {
+    return localStorage.getItem('refreshToken');
+  }
+
+  setAccessToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
   checkToken(token: string) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get('http://localhost:3000/api/authenticate', { 'headers': this.header});
