@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/models/User';
 import { Location } from '@angular/common';
+import { UserService } from 'src/services/user.service';
+import { TokenService } from 'src/services/token.service';
+import { AlertifyService } from 'src/services/alertify.service';
 
 @Component({
   selector: 'app-user-account',
@@ -17,7 +20,10 @@ export class UserAccountComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private location: Location) { }
+              private location: Location,
+              private userService: UserService,
+              private tokenService: TokenService,
+              private alertifyService: AlertifyService) { }
 
   ngOnInit() {
     this.route.data.subscribe((userData: User) => {
@@ -35,20 +41,26 @@ export class UserAccountComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userSubmitted = true;
 
+    // if the account form is valid
+    if(this.accountForm.valid) {
+      // instantiate a new user with new values
+      const user: User = {
+        Id: this.tokenService.getInfo().Id,
+        Username: this.Username.value,
+        Email: this.Email.value,
+        Password: this.Password.value
+      }
+      // send it to backend
+      this.userService.editUser(user).subscribe();
+      this.alertifyService.success('Successfully edited user!');
+      window.location.reload();
+    }
   }
 
   onBack() {
     this.location.back();
-  }
-
-  checkIfChanged() {
-    if(this.user.Username != this.Username.value ||
-       this.user.Password != this.Password.value ||
-       this.user.Email != this.Email.value) {
-         return true;
-       }
-    return false;
   }
 
   // ------------------------------------
@@ -68,4 +80,23 @@ export class UserAccountComponent implements OnInit {
   }
   // ------------------------------------
 
+  // ------------------------------------
+  // Helper-methods
+  // ------------------------------------
+  checkIfChanged() {
+    if(this.user.Username != this.Username.value ||
+       this.user.Password != this.Password.value ||
+       this.user.Email != this.Email.value) {
+         return true;
+       }
+    return false;
+  }
+
+  isValid(): boolean {
+    if(this.accountForm.valid){
+      return true;
+    }
+    return false;
+  }
+  // ------------------------------------
 }
