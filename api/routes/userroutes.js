@@ -22,7 +22,6 @@ router.get('/account/:id', authenticate, async (req, res) => {
     const userId = req.params.id
     const user = await getUserById(userId)
     if(user) {
-        console.log(user)
         return res.status(200).json(user)
     }
     return res.status(400).send('User not found')
