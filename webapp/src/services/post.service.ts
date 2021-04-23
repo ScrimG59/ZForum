@@ -13,6 +13,6 @@ export class PostService {
 
   addPost(post: CreatePost) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post('http://localhost:3000/api/post/add', post, {'headers': this.header});
+    return this.http.post('http://localhost:3000/api/post/add', post);
   }
 }

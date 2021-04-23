@@ -36,7 +36,7 @@ export class ThreadService {
 
   addThread(thread: CreateThread) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.post('http://localhost:3000/api/thread/add', thread, {'headers': this.header});
+    return this.http.post('http://localhost:3000/api/thread/add', thread);
   }
 
 }

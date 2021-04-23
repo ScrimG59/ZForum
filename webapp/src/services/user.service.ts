@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { LoginUser } from 'src/models/LoginUser';
 import { RegisterUser } from 'src/models/RegisterUser';
 import { User } from 'src/models/User';
@@ -32,6 +31,6 @@ export class UserService {
 
   getUserPrivate(id: number) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    return this.http.get(`http://localhost:3000/api/user/account/${id}`, { 'headers': this.header });
+    return this.http.get(`http://localhost:3000/api/user/account/${id}`);
   }
 }
