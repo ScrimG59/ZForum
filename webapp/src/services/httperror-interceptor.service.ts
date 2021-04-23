@@ -14,17 +14,19 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
   constructor(private alertifyService: AlertifyService, private tokenService: TokenService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>  {
-    request = this.addToken(request, localStorage.getItem('token'));
+    // add to each request the authorization header
+    request = this.addToken(request, this.tokenService.getAccessToken());
+    // catch any error that comes as an answer for the request
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken = this.tokenService.getRefreshToken();
         console.log(error);
         // if token expired
         if(error.status === 403 && refreshToken) {
           // get a new token and retry the request with the new access token in the header
-          return this.tokenService.getNewToken(refreshToken).pipe(switchMap((data: any) => {
-            localStorage.setItem('token', data);
-            return next.handle(this.addToken(request, localStorage.getItem('token')));
+          return this.tokenService.getNewToken(refreshToken).pipe(switchMap((token: string) => {
+            this.tokenService.setAccessToken(token);
+            return next.handle(this.addToken(request, this.tokenService.getAccessToken()));
           }));
         }
         else {
@@ -36,7 +38,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
     );
   }
 
-  // Retry the request in case of an error
+  // Retry the request in case of an error a certain number of times
   private retryRequest(error: Observable<unknown>, retryCount: number): Observable<unknown> {
     return error.pipe(
       concatMap((checkError: HttpErrorResponse, count: number) => {
