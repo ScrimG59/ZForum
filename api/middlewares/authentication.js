@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 const { getUserById } = require('../services/userservice')
 
+// authentication-middleware
 const authenticate = (req, res, next) => {
   const authHeader = req.headers['authorization']
   // if there's an authHeader split it, so we only get the token
   // otherwise return undefined
   const token = authHeader && authHeader.split(' ')[1]
-  console.log(token)
 
   if(token === null) {
       return res.status(401).send('Header is empty.')
