@@ -40,7 +40,7 @@ export class ThreadDetailComponent implements OnInit {
 
   createPostForm() {
     this.postForm = this.formBuilder.group({
-      Content: new FormControl(null, [Validators.required, Validators.minLength(1)])
+      Content: new FormControl(null, [Validators.required, Validators.minLength(2)])
     });
   }
 
@@ -66,8 +66,22 @@ export class ThreadDetailComponent implements OnInit {
   }
 
 
-  // Helper-Methods
+  // ------------------------------------
+  // Getter-methods for all form controls
+  // ------------------------------------
   get Content() {
     return this.postForm.get('Content') as FormControl;
   }
+  // ------------------------------------
+
+  // ------------------------------------
+  // Helper-methods
+  // ------------------------------------
+  isValid(): boolean {
+    if(this.postForm.valid){
+      return true;
+    }
+    return false;
+  }
+  // ------------------------------------
 }

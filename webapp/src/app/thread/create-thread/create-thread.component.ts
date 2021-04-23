@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class CreateThreadComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private threadService: ThreadService,
-              private tokenService: TokenService) { }
+              private tokenService: TokenService,
+              private location: Location) { }
 
   ngOnInit() {
     this.createThreadForm();
@@ -51,10 +53,10 @@ export class CreateThreadComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['']);
+    this.location.back();
   }
 
-    // ------------------------------------
+  // ------------------------------------
   // Getter-methods for all form controls
   // ------------------------------------
 
@@ -68,4 +70,14 @@ export class CreateThreadComponent implements OnInit {
 
   // ------------------------------------
 
+  // ------------------------------------
+  // Helper-methods
+  // ------------------------------------
+  isValid(): boolean {
+    if(this.threadForm.valid){
+      return true;
+    }
+    return false;
+  }
+  // ------------------------------------
 }

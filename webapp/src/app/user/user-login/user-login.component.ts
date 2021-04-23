@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +19,8 @@ export class UserLoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private userService: UserService,
-              private alertifyService: AlertifyService) { }
+              private alertifyService: AlertifyService,
+              private location: Location) { }
 
   ngOnInit() {
     this.createLoginForm();
@@ -41,7 +43,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['']);
+    this.location.back();
   }
 
 
@@ -74,5 +76,12 @@ export class UserLoginComponent implements OnInit {
     })
   }
 
+  isValid(): boolean {
+    if(this.loginForm.valid){
+      return true;
+    }
+    return false;
+  }
+  // ------------------------------------
 
 }

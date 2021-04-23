@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class UserRegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private userService: UserService,
-              private alertifyService: AlertifyService) { }
+              private alertifyService: AlertifyService,
+              private location: Location) { }
 
   ngOnInit() {
     this.createRegistrationForm();
@@ -53,15 +55,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['']);
-  }
-
-  createUser() {
-    return this.user = {
-      Username: this.Username.value,
-      Email: this.Email.value,
-      Password: this.Password.value
-    }
+    this.location.back();
   }
 
   // ------------------------------------
@@ -85,5 +79,22 @@ export class UserRegisterComponent implements OnInit {
   }
   // ------------------------------------
 
+  // ------------------------------------
+  // Helper-methods
+  // ------------------------------------
+  isValid(): boolean {
+    if(this.registrationForm.valid){
+      return true;
+    }
+    return false;
+  }
 
+  createUser() {
+    return this.user = {
+      Username: this.Username.value,
+      Email: this.Email.value,
+      Password: this.Password.value
+    }
+  }
+  // ------------------------------------
 }
