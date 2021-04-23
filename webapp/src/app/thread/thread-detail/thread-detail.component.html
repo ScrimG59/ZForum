@@ -26,6 +26,6 @@
   </div>
   <form *ngIf="loggedIn()" [formGroup]="postForm" class="create-post-section" (ngSubmit)="onSubmit()">
     <textarea placeholder="Write your answer here..." class="create-post-textarea" formControlName="Content"></textarea>
-    <button type="submit" class="btn btn-submit">Create a post</button>
+    <button type="submit" [disabled]="!isValid()" class="btn btn-submit">Create a post</button>
   </form>
 </div>

@@ -57,7 +57,7 @@
           </span>
         </div>
         <div class="form-buttons">
-          <button type="submit" class="btn btn-submit">Register</button>
+          <button type="submit" [disabled]="!isValid()" class="btn btn-submit">Register</button>
           <button type="button" (click)="onBack()" class="btn btn-cancel">Cancel</button>
         </div>
       </form>
