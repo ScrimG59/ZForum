@@ -25,12 +25,18 @@ router.post('/', async (req, res) => {
             return res.status(401).send('Refresh token not valid.')
         }
 
-        const accesstoken = generateAccessToken({Id: user.Id, Username: user.Username})
+        const newUser = {
+            Id: user.Id, 
+            Username: user.Username, 
+            Email: user.Email, 
+            Password: user.Password
+        }
+        const accesstoken = generateAccessToken(newUser)
         return res.status(201).json(accesstoken)
     })
 })
 
-// checks if refreshtoken is in database
+// only checks if refreshtoken is in database
 router.post('/refreshtoken', async (req, res) => {
     const refreshToken = req.body.RefreshToken
 
