@@ -26,6 +26,10 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/logout', {'RefreshToken': refreshToken});
   }
 
+  editUser(user: User) {
+    return this.http.patch('http://localhost:3000/api/user/edit', user);
+  }
+
   getUserPrivate(id: number) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get(`http://localhost:3000/api/user/account/${id}`, { 'headers': this.header });
