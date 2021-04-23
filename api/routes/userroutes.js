@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const router = express.Router()
-const { getAllUsers, addUser, getUserById } = require('../services/userservice')
+const { getAllUsers, addUser, getUserById, editUser } = require('../services/userservice')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {addRefreshToken, deleteRefreshToken} = require('../services/tokenservice')
@@ -75,9 +75,41 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// HTTP-Patch to update user info
+router.patch('/edit', authenticate, async (req, res) => {
+    const user = req.body
+    const userFromDb = await getUserById(req.body.Id)
+
+    if(!userFromDb) {
+        return res.status(400).send('User does not exist.')
+    }
+
+    if(userFromDb.Password !== user.Password) {
+        const newPassword = await changePassword(user.Password)
+        user.Password = newPassword
+    }
+    const id = await editUser(user)
+    return res.status(200).json(`Edited user with Id ${id}`)
+})
+
+// HTTP-Post to log user out
 router.post('/logout', async (req, res) => {
     await deleteRefreshToken(req.body.RefreshToken)
     return res.status(200).json('Successfully logged out.')
 });
+
+
+
+// Helper-functions
+const changePassword = async (password) => {
+    try {
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(password, salt)
+        return hashedPassword
+    }
+    catch {
+        return null
+    }
+}
 
 module.exports = router
