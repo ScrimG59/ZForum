@@ -30,6 +30,10 @@ export class TokenService {
     localStorage.setItem('token', token);
   }
 
+  setRefreshToken(token: string): void {
+    localStorage.setItem('refreshToken', token);
+  }
+
   checkToken(token: string) {
     //this.header = this.header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get('http://localhost:3000/api/authenticate');
