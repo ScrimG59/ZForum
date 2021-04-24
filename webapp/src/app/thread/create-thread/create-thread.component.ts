@@ -45,10 +45,10 @@ export class CreateThreadComponent implements OnInit {
         UserId: this.tokenService.getInfo().Id,
         CreationDate: Date().toLocaleString().split('GMT')[0]
       }
+      this.threadForm.reset();
       this.threadService.addThread(this.newThread).subscribe((data:number) => {
         this.router.navigate([`/thread/detail/${data}`]);
       })
-
     }
   }
 
