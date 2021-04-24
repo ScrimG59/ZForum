@@ -59,6 +59,7 @@ textarea {
   box-shadow: none;
   color: white;
   font-size: 1.2rem;
+  resize: none;
 }
 
 .btn {
