@@ -7,6 +7,7 @@ import { CreatePost } from 'src/models/CreatePost';
 import { AlertifyService } from 'src/services/alertify.service';
 import { TokenService } from 'src/services/token.service';
 import { AuthenticationGuardService } from 'src/services/auth-guard.service';
+import { Post } from 'src/models/Post';
 
 @Component({
   selector: 'app-thread-detail',
@@ -17,6 +18,7 @@ export class ThreadDetailComponent implements OnInit {
 
   loggedInUser: boolean = false;
   thread: Thread =  new Thread();
+  posts: Array<any>;
   postForm: FormGroup;
   post: CreatePost = new CreatePost();
 
@@ -31,6 +33,7 @@ export class ThreadDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: Thread) => {
       this.thread = data['threads'];
+      this.posts = this.thread.Posts;
     }, error => {
       // if there's an error, redirect to main page
       this.router.navigate(['']);
@@ -58,10 +61,17 @@ export class ThreadDetailComponent implements OnInit {
         ThreadId: this.route.snapshot.params['id'],
         CreationDate: Date().toLocaleString().split('GMT')[0]
       }
-      this.postService.addPost(this.post).subscribe(data => {
-        window.location.reload();
-        this.alertifyService.success('Successfully posted!');
-      });
+      this.postService.addPost(this.post).subscribe();
+      const cachedPost = {
+        Content: this.Content.value,
+        UserId: this.tokenService.getInfo().Id,
+        ThreadId: this.route.snapshot.params['id'],
+        CreationDate: Date().toLocaleString().split('GMT')[0],
+        Username: this.tokenService.getInfo().Username
+      }
+      this.postForm.reset();
+      this.posts.push(cachedPost);
+      this.alertifyService.success('Successfully posted!');
     }
   }
 
