@@ -14,7 +14,7 @@
   </div>
   <h3 class="replies-header">Replies: </h3>
   <div class="post-list">
-      <div *ngFor="let threadPost of thread.Posts" class="post-item">
+      <div *ngFor="let threadPost of posts" class="post-item">
         <div class="content">
           <div class="description"> {{ threadPost.Content }}</div>
           <div class="date"> <span class="green"><br>Created on: </span>{{ threadPost.CreationDate }}<br> <br>
