@@ -2,8 +2,10 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginUser } from 'src/models/LoginUser';
 import { LoginUserResponse } from 'src/models/LoginUserResponse';
 import { AlertifyService } from 'src/services/alertify.service';
+import { TokenService } from 'src/services/token.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -15,12 +17,14 @@ export class UserLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   userSubmitted: boolean = false;
+  user: LoginUser = new LoginUser();
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private userService: UserService,
               private alertifyService: AlertifyService,
-              private location: Location) { }
+              private location: Location,
+              private tokenService: TokenService) { }
 
   ngOnInit() {
     this.createLoginForm();
@@ -37,7 +41,11 @@ export class UserLoginComponent implements OnInit {
     this.userSubmitted = true;
 
     if(this.loginForm.valid) {
-      this.loginUser(this.loginForm.value);
+      this.user = {
+        Email: this.Email.value,
+        Password: this.Password.value
+      }
+      this.loginUser(this.user);
       this.userSubmitted = false;
     }
   }
@@ -65,14 +73,14 @@ export class UserLoginComponent implements OnInit {
   // Helper-methods
   // ------------------------------------
 
-  loginUser(user) {
+  loginUser(user: LoginUser) {
     return this.userService.loginUser(user).subscribe((res: LoginUserResponse) => {
       if(!res) {return;}
-      localStorage.setItem('token', res.Token);
-      localStorage.setItem('refreshToken', res.RefreshToken);
+      this.loginForm.reset();
+      this.tokenService.setAccessToken(res.Token);
+      this.tokenService.setRefreshToken(res.RefreshToken);
       this.alertifyService.success('Successfully logged in.');
       this.router.navigate(['']);
-      this.loginForm.reset();
     })
   }
 
