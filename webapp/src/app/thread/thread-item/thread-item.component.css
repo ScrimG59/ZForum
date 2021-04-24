@@ -20,7 +20,6 @@
 }
 
 h5 {
-  word-break: break-all;
   font-size: 1.5em;
   font-weight: bold;
   padding: 1rem;
@@ -43,7 +42,6 @@ hr {
 }
 
 .description {
-  word-break: break-all;
   font-size: 1rem;
   color: rgb(228, 228, 228);
   padding: 0.5em;
@@ -58,7 +56,6 @@ hr {
   padding: 0.6rem;
   color: rgb(228, 228, 228);
   border-left: 1px solid white;
-  word-break: break-all;
 }
 
 .user-name {
