@@ -22,7 +22,8 @@ const routes: Routes = [
   canActivate: [AuthenticationGuardService]},
   {path: 'user/account', component: UserAccountComponent,
   canActivate: [AuthenticationGuardService],
-  resolve: {acc: UserAccountResolverService}}
+  resolve: {acc: UserAccountResolverService}},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
