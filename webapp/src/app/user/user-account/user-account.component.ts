@@ -52,6 +52,7 @@ export class UserAccountComponent implements OnInit {
         Email: this.Email.value,
         Password: this.Password.value
       }
+      this.accountForm.reset();
       // send it to backend
       this.userService.editUser(user).subscribe();
       this.alertifyService.success('Successfully edited user!');
